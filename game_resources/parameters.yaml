@@ -1,0 +1,30 @@
+# TODO: the following restrictions should be validated with an schema
+# direction values: clockwise, counter-clockwise, random
+# max_movement: number
+# ring: number between 1 and 4
+
+bosses:
+  - display_name: "S. ABASCAL"
+    ring: 1
+    max_movement: 6
+    direction: random
+
+  - display_name: "GRIFFITH"
+    ring: 2
+    max_movement: 6
+    direction: random
+
+  - display_name: "ELON MUSK"
+    ring: 3
+    max_movement: 6
+    direction: random
+
+  - display_name: "PATRICK BATEMAN"
+    ring: 4
+    max_movement: 6
+    direction: random
+
+  - display_name: "DARTH VADER"
+    ring: 5
+    max_movement: 6
+    direction: random
