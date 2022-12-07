@@ -1,0 +1,3 @@
+https://www.desmos.com/calculator/ghx2qonp4a
+
+(\operatorname{ceil}\left(\log_{2}\left(1\ +\ 2x\right)\right))
