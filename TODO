@@ -1,14 +1,19 @@
+make the officeSign variable  the same as itemOffice
+la funcion de menu puede aceptar un parametro extra con los campos que necesiten confirmacion de si/no (para que no se haga manualmente)
+
 CONVERSION A GEMAS:
     revisar la funcion que hay ahora
     queremos hacer cambio de monedas a gemas tambien???
+    añadir alguna otra funcionalidad??
 
 AJUSTAR LOS VALORES DE LOS BOSSES
 
 TRIVIAL:
-    revisar las preguntas, tal vez guardarlas en formato yaml cada pregunta con su solución y ver la opcion de enseñar la solucion
+    revisar las preguntas, 
+    tal vez guardarlas en formato yaml cada pregunta con su solución y ver la opcion de enseñar la solucion
 
 USO DE ITEMS:
-    TODO ENTERO
-
+    MAYBE ADD A "DELETE ITEM" OPTION WHICH MODIFIES THE EXPIRING DATE OF THE ITEM TO THE ACTUAL TURN (DELETING THE ITEM AND LETTING IT BE IN THE SAVE)
+    maybe add an option to see all the items used in the game (expired and not expired)
 
     

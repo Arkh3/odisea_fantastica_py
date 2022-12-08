@@ -4,9 +4,9 @@ from utils.utils import loadYaml, menu, storeYaml
 from datetime import datetime
 from .triviaOffice import triviaQuestionsOffice
 from .moneyOffice import moneyExchangeOffice
+from .itemOffice import itemManagementOffice, showExpiredItems
 
 HISTORY_PATH = os.path.join(os.path.dirname(__file__), 'history')
-
 
 def getRandomDirection():
     direction = random.randint(0,1)
@@ -87,7 +87,7 @@ def startGame(hist=[]):
     while option != 'Salir':
         # DISPLAY TURN AND CHOOSE OPTION
         if actualTurn == latestTurn:
-            options = ['Nuevo turno', 'Turno anterior', 'Uso de item', 'Oficina de cambio de moneda', 'Preguntas tormentosas', 'Salir']
+            options = ['Nuevo turno', 'Turno anterior', 'Oficina de Gestión de Items', 'Oficina de Cambio de Moneda', 'Oficina Preguntas Tormentosas', 'Salir']
         else:
             options = ['Turno siguiente', 'Turno anterior', 'Ir al turno más reciente', 'Salir']
 
@@ -98,16 +98,11 @@ def startGame(hist=[]):
             latestTurn += 1
             actualTurn = latestTurn
             history.append(generateTurn(latestTurn, parameters))
+            showExpiredItems(history)
 
         elif option == 'Turno anterior':
             if actualTurn != 1:
                 actualTurn -= 1
-
-        elif option == 'Uso de item':
-            pass
-
-        elif option == 'Oficina de cambio de moneda':
-            moneyExchangeOffice()
 
         elif option == 'Turno siguiente':
             actualTurn += 1
@@ -115,7 +110,13 @@ def startGame(hist=[]):
         elif option == 'Ir al turno más reciente':
             actualTurn = latestTurn
 
-        elif option == 'Preguntas tormentosas':
+        elif option == 'Oficina de Gestión de Items':
+            history = itemManagementOffice(history)
+
+        elif option == 'Oficina de Cambio de Moneda':
+            moneyExchangeOffice()
+
+        elif option == 'Oficina Preguntas Tormentosas':
             triviaQuestionsOffice()
 
         elif option == 'Salir':
