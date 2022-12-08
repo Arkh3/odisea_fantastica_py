@@ -24,14 +24,18 @@ def captureKeys(keys):
 
     return ret
 
-def loadYaml(parameters_file_path):
-    with open(parameters_file_path, "r") as stream:
+def loadYaml(file_path):
+    with open(file_path, "r") as stream:
         try:
             parameters = yaml.safe_load(stream)
         except yaml.YAMLError as exc:
-            print(exc)
+            parameters = None
 
     return parameters
+
+def storeYaml(dictionary, file_path):
+    with open(file_path, 'w') as outfile:
+        yaml.dump(dictionary, outfile, default_flow_style=False)
 
 def menu(menuHeader, options):
     MIN_OPTION = 0
