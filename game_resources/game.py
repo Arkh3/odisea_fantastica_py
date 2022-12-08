@@ -85,14 +85,13 @@ def startGame(hist=[]):
     option = None
     
     while option != 'Salir':
-
         # DISPLAY TURN AND CHOOSE OPTION
         if actualTurn == latestTurn:
             options = ['Nuevo turno', 'Turno anterior', 'Uso de item', 'Oficina de cambio de moneda', 'Preguntas tormentosas', 'Salir']
         else:
             options = ['Turno siguiente', 'Turno anterior', 'Ir al turno más reciente', 'Salir']
 
-        option = menu(turnToString(history[actualTurn - 1], isLatestTurn=(latestTurn == actualTurn)), options)
+        option = menu(turnToString(history[actualTurn - 1], isLatestTurn=(latestTurn == actualTurn)), options, markedOption=option)
 
         # HANDLE OPTIONS
         if option == 'Nuevo turno':

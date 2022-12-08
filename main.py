@@ -3,11 +3,13 @@ from game_resources.game import startGame, getSavedGamesList, getSavedGame
 
 
 def main():
+    mainHeader = "ODISEA FANTÁSTICA\n\n\n" 
     options = ['Empezar nueva partida', 'Cargar partida', 'Salir']
     option = None
 
-    while(option != 'Salir'):
-        option = menu("ODISEA FANTÁSTICA\n\n\n Menú Principal:\n", options)
+    exit = False
+    while not exit:
+        option = menu(mainHeader + " Menú Principal:\n", options, markedOption=option)
 
         if option == 'Empezar nueva partida':
             startGame()
@@ -15,7 +17,7 @@ def main():
         elif option == 'Cargar partida':
             
             savedGames = getSavedGamesList()
-            option2 = menu("Partidas guardadas\n", savedGames + ['Volver al menú'])
+            option2 = menu(mainHeader + " Partidas guardadas\n", savedGames + ['Volver al menú'])
 
             if option2 != 'Volver al menú':
                 loadedGame = getSavedGame(option2)
@@ -23,10 +25,10 @@ def main():
             
         elif option == "Salir":
 
-            confirm = menu("¿Seguro que quieres salir?\n", ['Si', 'No'])
+            confirm = menu(mainHeader + " ¿Seguro que quieres salir?\n", ['Si', 'No'])
 
-            if confirm == 'No':
-                option = None
+            if confirm == 'Si':
+                exit = True
     
     flush_input()
 

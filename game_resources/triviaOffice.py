@@ -26,7 +26,7 @@ def triviaQuestionsOffice():
     menuOptions = ['Tormento Social', 'Tormento Físico', 'Tormento Intelectual', 'Salir']
 
     while option != 'Salir':
-        option = menu(menuHeader, menuOptions)
+        option = menu(menuHeader, menuOptions, markedOption=option)
 
         if option != 'Salir':
             option2 = None

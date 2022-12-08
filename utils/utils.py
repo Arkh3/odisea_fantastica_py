@@ -37,12 +37,16 @@ def storeYaml(dictionary, file_path):
     with open(file_path, 'w') as outfile:
         yaml.dump(dictionary, outfile, default_flow_style=False)
 
-def menu(menuHeader, options):
+def menu(menuHeader, options, markedOption=None):
     MIN_OPTION = 0
     MAX_OPTION = len(options) -1
 
+    if (markedOption is None) or (markedOption not in options):
+        option = 0
+    else:
+        option = options.index(markedOption)
+
     exit = False
-    option = 0
 
     while not exit:
         os.system('cls')

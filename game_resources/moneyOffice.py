@@ -11,7 +11,7 @@ def moneyExchangeOffice():
     option = None
 
     while option != 'Salir':
-        option = menu(officeSign + '\n', ['Cambiar gemas a monedas', 'Salir'])
+        option = menu(officeSign + '\n', ['Cambiar gemas a monedas', 'Salir'], markedOption=option)
 
         if option == 'Cambiar gemas a monedas':
 
