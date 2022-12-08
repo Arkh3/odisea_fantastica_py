@@ -37,7 +37,7 @@ def storeYaml(dictionary, file_path):
     with open(file_path, 'w') as outfile:
         yaml.dump(dictionary, outfile, default_flow_style=False)
 
-def menu(menuHeader, options, markedOption=None):
+def menu(menuHeader, options, markedOption=None, confirmOptions=None):
     MIN_OPTION = 0
     MAX_OPTION = len(options) -1
 
@@ -71,6 +71,12 @@ def menu(menuHeader, options, markedOption=None):
                 option = MIN_OPTION
 
         elif capturedKey == 'enter':
-            exit = True
+            if confirmOptions is not None and options[option] in confirmOptions:
+                confirm = menu("¿Seguro que quieres '" + options[option] + "'?\n", ['Si', 'No'])
+
+                if confirm == 'Si':
+                    exit = True
+            else: 
+                exit = True
 
     return options[option]

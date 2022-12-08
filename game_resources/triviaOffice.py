@@ -8,6 +8,8 @@ INTELLECTUAL_TORMENT_PATH = os.path.join(TRIVIA_PATH, 'tormentoIntelectual.triv'
 PHISICAL_TORMENT_PATH = os.path.join(TRIVIA_PATH, 'tormentoFisico.triv')
 SOCIAL_TORMENT_PATH = os.path.join(TRIVIA_PATH, 'tormentoSocial.triv')
 
+OFFICE_SIGN = 'OFICINA DE PREGUNTAS TORMENTOSAS:'
+
 
 def getRandomQuestion(file_name):
 
@@ -22,7 +24,7 @@ def getRandomQuestion(file_name):
 def triviaQuestionsOffice():
     option = None
 
-    menuHeader = 'OFICINA DE PREGUNTAS TORMENTOSAS:\n[Elige una de las tres opciones para recibir una pregunta aleatoria]\n'
+    menuHeader = OFFICE_SIGN + '\n[Elige una de las tres opciones para recibir una pregunta aleatoria]\n'
     menuOptions = ['Tormento Social', 'Tormento Físico', 'Tormento Intelectual', 'Salir']
 
     while option != 'Salir':

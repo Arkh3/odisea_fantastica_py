@@ -9,7 +9,7 @@ def main():
 
     exit = False
     while not exit:
-        option = menu(mainHeader + " Menú Principal:\n", options, markedOption=option)
+        option = menu(mainHeader + " Menú Principal:\n", options, markedOption=option, confirmOptions='Salir')
 
         if option == 'Empezar nueva partida':
             startGame()
@@ -24,11 +24,7 @@ def main():
                 startGame(loadedGame)
             
         elif option == "Salir":
-
-            confirm = menu(mainHeader + " ¿Seguro que quieres salir?\n", ['Si', 'No'])
-
-            if confirm == 'Si':
-                exit = True
+            exit = True
     
     flush_input()
 

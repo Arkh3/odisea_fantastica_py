@@ -78,9 +78,13 @@ def startGame(hist=[]):
     
     history = hist
 
-    actualTurn = len(history) + 1
-    latestTurn = len(history) + 1
-    history.append(generateTurn(latestTurn, parameters))
+    actualTurn = len(history)
+    latestTurn = len(history)
+
+    if len(history) == 0:
+        actualTurn += 1
+        latestTurn += 1
+        history.append(generateTurn(latestTurn, parameters))
 
     option = None
     
@@ -91,7 +95,7 @@ def startGame(hist=[]):
         else:
             options = ['Turno siguiente', 'Turno anterior', 'Ir al turno más reciente', 'Salir']
 
-        option = menu(turnToString(history[actualTurn - 1], isLatestTurn=(latestTurn == actualTurn)), options, markedOption=option)
+        option = menu(turnToString(history[actualTurn - 1], isLatestTurn=(latestTurn == actualTurn)), options, markedOption=option, confirmOptions='Salir')
 
         # HANDLE OPTIONS
         if option == 'Nuevo turno':
@@ -120,15 +124,10 @@ def startGame(hist=[]):
             triviaQuestionsOffice()
 
         elif option == 'Salir':
-            confirm = menu('¿Seguro que quieres salir?\n', ['Si', 'No'])
+            confirmSave = menu('¿Quieres guardar la partida?\n', ['Si', 'No'])
 
-            if confirm == 'No':
-                option = None
-            else:
-                wantSave = menu('¿Quieres guardar la partida?\n', ['Si', 'No'])
+            if confirmSave == 'Si':
+                filename = datetime.now().strftime('%d%m%Y_%H%M%S') + '.his'
+                savePath = os.path.join(HISTORY_PATH, filename)
 
-                if wantSave == 'Si':
-                    filename = datetime.now().strftime('%d%m%Y_%H%M%S') + '.his'
-                    savePath = os.path.join(HISTORY_PATH, filename)
-
-                    storeYaml(history, savePath)
+                storeYaml(history, savePath)
