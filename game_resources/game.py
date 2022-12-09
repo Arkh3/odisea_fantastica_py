@@ -1,6 +1,6 @@
 import os
 import random
-from utils.utils import loadYaml, menu, storeYaml
+from utils.utils import loadYaml, menu, storeYaml, captureKeys
 from datetime import datetime
 from .triviaOffice import triviaQuestionsOffice
 from .moneyOffice import moneyExchangeOffice
@@ -75,16 +75,19 @@ def saveGame(header, history):
     confirmSave = menu(header + '¿Quieres guardar la partida?\n', ['Si', 'No'])
 
     if confirmSave == 'Si':
-        filename = datetime.now().strftime('%d%m%Y_%H%M%S') + '.his'
+        filename = datetime.now().strftime('Fecha %d-%m-%Y Hora %H_%M_%S') + '.his'
         savePath = os.path.join(HISTORY_PATH, filename)
 
         storeYaml(history, savePath)
 
         print("\nLa partida se ha guardado correctamente.\n")
+        print("Presiona [ENTER] para continuar...")
+        captureKeys(['enter'])
 
 # MAIN FUNCTION
 
-def startGame(hist=[]):
+def startGame(hist):
+
     history = hist
     
     try:

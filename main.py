@@ -14,7 +14,7 @@ def main():
             option = menu(mainHeader + " Menú Principal:\n", options, markedOption=option, confirmOptions='Salir')
 
             if option == 'Empezar nueva partida':
-                startGame()
+                startGame([])
             
             elif option == 'Cargar partida':
                 savedGames = getSavedGamesList()

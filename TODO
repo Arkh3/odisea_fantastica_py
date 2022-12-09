@@ -1,4 +1,3 @@
-HACER QUE SI SALTA UNA EXCEPCIÓN DEJE GUARDAR EL HISTORIAL 
 
 CONVERSION A GEMAS:
     revisar la funcion que hay ahora
@@ -9,7 +8,7 @@ AJUSTAR LOS VALORES DE LOS BOSSES
 
 TRIVIAL:
     revisar las preguntas, 
-    tal vez guardarlas en formato yaml cada pregunta con su solución y ver la opcion de enseñar la solucion
+    añadir o quitar las soluciones
 
 USO DE ITEMS:
     MAYBE ADD A "DELETE ITEM" OPTION WHICH MODIFIES THE EXPIRING DATE OF THE ITEM TO THE ACTUAL TURN (DELETING THE ITEM AND LETTING IT BE IN THE SAVE)
