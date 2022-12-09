@@ -1,31 +1,36 @@
 from utils.utils import menu, flush_input
 from game_resources.game import startGame, getSavedGamesList, getSavedGame
-
+import traceback
 
 def main():
-    mainHeader = "ODISEA FANTÁSTICA\n\n\n" 
-    options = ['Empezar nueva partida', 'Cargar partida', 'Salir']
-    option = None
+    try:
+        mainHeader = "ODISEA FANTÁSTICA\n\n\n" 
+        options = ['Empezar nueva partida', 'Cargar partida', 'Salir']
 
-    exit = False
-    while not exit:
-        option = menu(mainHeader + " Menú Principal:\n", options, markedOption=option, confirmOptions='Salir')
-
-        if option == 'Empezar nueva partida':
-            startGame()
+        exit = False
+        option = None
         
-        elif option == 'Cargar partida':
-            
-            savedGames = getSavedGamesList()
-            option2 = menu(mainHeader + " Partidas guardadas\n", savedGames + ['Volver al menú'])
+        while not exit:
+            option = menu(mainHeader + " Menú Principal:\n", options, markedOption=option, confirmOptions='Salir')
 
-            if option2 != 'Volver al menú':
-                loadedGame = getSavedGame(option2)
-                startGame(loadedGame)
+            if option == 'Empezar nueva partida':
+                startGame()
             
-        elif option == "Salir":
-            exit = True
-    
+            elif option == 'Cargar partida':
+                savedGames = getSavedGamesList()
+                option2 = menu(mainHeader + " Partidas guardadas\n", savedGames + ['Volver al menú'])
+
+                if option2 != 'Volver al menú':
+                    loadedGame = getSavedGame(option2)
+                    startGame(loadedGame)
+                
+            elif option == "Salir":
+                exit = True
+    except:
+        print("\n¡OOPS! ALGO HA FALLADO (parece que no se hacer mi trabajo)\nImprimiendo el traceback: \n")
+        print(traceback.format_exc())
+
+
     flush_input()
 
 if __name__ == '__main__':
