@@ -9,7 +9,7 @@ def main():
 
         exit = False
         option = None
-        
+
         while not exit:
             option = menu(mainHeader + " Menú Principal:\n", options, markedOption=option, confirmOptions='Salir')
 
@@ -27,9 +27,8 @@ def main():
             elif option == "Salir":
                 exit = True
     except:
-        print("\n¡OOPS! ALGO HA FALLADO (parece que no se hacer mi trabajo)\nImprimiendo el traceback: \n")
+        print("\n¡OOPS! ALGO HA FALLADO (parece que no se hacer mi trabajo)\nImprimiendo traceback: \n")
         print(traceback.format_exc())
-
 
     flush_input()
 

@@ -25,10 +25,10 @@ def captureKeys(keys):
     return ret
 
 def loadYaml(file_path):
-    with open(file_path, "r") as stream:
+    with open(file_path, "r", encoding="utf8") as stream:
         try:
             parameters = yaml.safe_load(stream)
-        except yaml.YAMLError as exc:
+        except yaml.YAMLError:
             parameters = None
 
     return parameters

@@ -71,63 +71,73 @@ def getSavedGamesList():
 def getSavedGame(name):
     return loadYaml(os.path.join(HISTORY_PATH, name))
 
+def saveGame(header, history):
+    confirmSave = menu(header + '¿Quieres guardar la partida?\n', ['Si', 'No'])
+
+    if confirmSave == 'Si':
+        filename = datetime.now().strftime('%d%m%Y_%H%M%S') + '.his'
+        savePath = os.path.join(HISTORY_PATH, filename)
+
+        storeYaml(history, savePath)
+
+        print("\nLa partida se ha guardado correctamente.\n")
+
 # MAIN FUNCTION
 
 def startGame(hist=[]):
-    parameters = loadYaml(os.path.join(os.path.dirname(__file__), 'parameters.yaml'))
-    
     history = hist
-
-    actualTurn = len(history)
-    latestTurn = len(history)
-
-    if len(history) == 0:
-        actualTurn += 1
-        latestTurn += 1
-        history.append(generateTurn(latestTurn, parameters))
-
-    option = None
     
-    while option != 'Salir':
-        # DISPLAY TURN AND CHOOSE OPTION
-        if actualTurn == latestTurn:
-            options = ['Nuevo turno', 'Turno anterior', 'Oficina de Gestión de Items', 'Oficina de Cambio de Moneda', 'Oficina Preguntas Tormentosas', 'Salir']
-        else:
-            options = ['Turno siguiente', 'Turno anterior', 'Ir al turno más reciente', 'Salir']
+    try:
+        parameters = loadYaml(os.path.join(os.path.dirname(__file__), 'parameters.yaml'))
 
-        option = menu(turnToString(history[actualTurn - 1], isLatestTurn=(latestTurn == actualTurn)), options, markedOption=option, confirmOptions='Salir')
+        actualTurn = len(history)
+        latestTurn = len(history)
 
-        # HANDLE OPTIONS
-        if option == 'Nuevo turno':
-            latestTurn += 1
-            actualTurn = latestTurn
-            history.append(generateTurn(latestTurn, parameters))
-            showExpiredItems(history)
-
-        elif option == 'Turno anterior':
-            if actualTurn != 1:
-                actualTurn -= 1
-
-        elif option == 'Turno siguiente':
+        if len(history) == 0:
             actualTurn += 1
+            latestTurn += 1
+            history.append(generateTurn(latestTurn, parameters))
 
-        elif option == 'Ir al turno más reciente':
-            actualTurn = latestTurn
+        option = None
+        
+        while option != 'Salir':
+            # DISPLAY TURN AND CHOOSE OPTION
+            if actualTurn == latestTurn:
+                options = ['Nuevo turno', 'Turno anterior', 'Oficina de Gestión de Items', 'Oficina de Cambio de Moneda', 'Oficina Preguntas Tormentosas', 'Salir']
+            else:
+                options = ['Turno siguiente', 'Turno anterior', 'Ir al turno más reciente', 'Salir']
 
-        elif option == 'Oficina de Gestión de Items':
-            history = itemManagementOffice(history)
+            option = menu(turnToString(history[actualTurn - 1], isLatestTurn=(latestTurn == actualTurn)), options, markedOption=option, confirmOptions='Salir')
 
-        elif option == 'Oficina de Cambio de Moneda':
-            moneyExchangeOffice()
+            # HANDLE OPTIONS
+            if option == 'Nuevo turno':
+                latestTurn += 1
+                actualTurn = latestTurn
+                history.append(generateTurn(latestTurn, parameters))
+                showExpiredItems(history)
 
-        elif option == 'Oficina Preguntas Tormentosas':
-            triviaQuestionsOffice()
+            elif option == 'Turno anterior':
+                if actualTurn != 1:
+                    actualTurn -= 1
 
-        elif option == 'Salir':
-            confirmSave = menu('¿Quieres guardar la partida?\n', ['Si', 'No'])
+            elif option == 'Turno siguiente':
+                actualTurn += 1
 
-            if confirmSave == 'Si':
-                filename = datetime.now().strftime('%d%m%Y_%H%M%S') + '.his'
-                savePath = os.path.join(HISTORY_PATH, filename)
+            elif option == 'Ir al turno más reciente':
+                actualTurn = latestTurn
 
-                storeYaml(history, savePath)
+            elif option == 'Oficina de Gestión de Items':
+                history = itemManagementOffice(history)
+
+            elif option == 'Oficina de Cambio de Moneda':
+                moneyExchangeOffice()
+
+            elif option == 'Oficina Preguntas Tormentosas':
+                triviaQuestionsOffice()
+
+            elif option == 'Salir':
+                saveGame('', history)
+    
+    except Exception as e:
+        saveGame('ALGO NO HA SALIDO COMO ESPERABA\n\n Se va a cerrar el programa ', history)
+        raise e
